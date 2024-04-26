@@ -1,5 +1,5 @@
-import { Divider, Table } from "antd";
-import React from "react";
+import { Divider, Spin, Table } from "antd";
+import React, { useState, useEffect } from "react";
 
 const columns = [
   {
@@ -8,8 +8,8 @@ const columns = [
     render: (text) => <a>{text}</a>,
   },
   {
-    title: "Age",
-    dataIndex: "age",
+    title: "Email",
+    dataIndex: "email",
   },
   {
     title: "Address",
@@ -21,85 +21,94 @@ const data = [
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-  },
-
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
     name: "John Brown",
-    age: 32,
+    email: "noman@iut-dhaka.edu",
     address: "New York No. 1 Lake Park",
   },
-  // Additional data omitted for brevity
+  {
+    key: "1",
+    name: "John Brown",
+    email: "noman@iut-dhaka.edu",
+    address: "New York No. 1 Lake Park",
+  },
 ];
 
 const UserListLayout = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate data loading delay
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000); // 1 second delay
+  }, []);
+
   return (
     <>
       <div>
         <Divider />
-        <Table columns={columns} dataSource={data} />
+        <Spin spinning={loading}>
+          <Table columns={columns} dataSource={data} />
+        </Spin>
       </div>
     </>
   );

@@ -47,7 +47,7 @@ const items = [
   getItem("User List", "5", <UserOutlined />),
   getItem("Sell History", "2", <HistoryOutlined />),
   getItem("Client Message", "6", <MessageOutlined />),
-  getItem("Revenues", "4", <FieldTimeOutlined />),
+  getItem("Data Analysis", "4", <FieldTimeOutlined />),
 ];
 
 const DashboardLayout = () => {
@@ -81,13 +81,13 @@ const DashboardLayout = () => {
         <Header style={{ padding: 0, background: colorBgContainer }} />
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
+            {/* <Breadcrumb.Item>User</Breadcrumb.Item> */}
             <Breadcrumb.Item>
-              {selectedKey === "1"
+              {/* {selectedKey === "1"
                 ? "Option 1"
                 : selectedKey === "2"
                 ? "Option 2"
-                : ""}
+                : ""} */}
             </Breadcrumb.Item>
           </Breadcrumb>
           <div
