@@ -65,7 +65,7 @@ export default function CarSellCollection() {
                         <span>$</span> {post.price}
                       </h6>
                       <NavLink
-                        to={`/car-details/${post.id}`}
+                        to={`/client/car-details/${post.id}`}
                         className="btn "
                         style={{ backgroundColor: "#8FC8CD", color:"white" }}
                       >

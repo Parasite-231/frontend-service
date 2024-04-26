@@ -13,6 +13,7 @@ import ErrorServerPage from "./pages/error/ErrorServerPage";
 import HomePage from "./pages/home/HomePage";
 import OTPSuccessPage from "./pages/success/OTPSuccessPage";
 import "./styles/client/auth.css";
+import CarDetailsPage from "./pages/client/CarDetailsPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/client/otp-verified" element={<OTPSuccessPage />} />
           <Route path="/client/profile" element={<ProfilePage />} />
           <Route path="/client/car-sell" element={<CarSellPage />} />
+          <Route path="/client/car-details/:id" element={<CarDetailsPage />} />
 
           {/* admin */}
 
