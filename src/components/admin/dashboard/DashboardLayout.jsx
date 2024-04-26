@@ -5,12 +5,18 @@ import {
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
+  MessageOutlined,
+  HistoryOutlined,
+  FieldTimeOutlined
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import React, { useState } from "react";
 import ChartComponent from "./ChartComponent"; // Renamed import
-import OrderLayout from "./OrderLayout";
 import ProfileLayout from "./ProfileLayout";
+import SellHistoryLayout from "./SellHistoryLayout";
+import UserListLayout from "./UserListLayout";
+import ClientMessageLayout from "./ClientMessageLayout";
+import DashboardAggregationLayout from "./DashboardAggregationLayout";
 // Import other layout components here
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -26,26 +32,22 @@ function getItem(label, key, icon, children) {
 
 // Map menu item keys to their corresponding layout components
 const layoutComponents = {
-  1: <OrderLayout />,
-  2: <ProfileLayout />,
-  10 : <ChartComponent />, // Using the corrected import name
-  // Add other menu item keys and their corresponding layout components here
+  1: <DashboardAggregationLayout />,
+  2: <SellHistoryLayout />,
+  // 3: <ProfileLayout />,
+  4: <ChartComponent />, 
+  5: <UserListLayout />,
+  6: <ClientMessageLayout />
+  
 };
 
 const items = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("User", "sub1", <UserOutlined />, [
-    getItem("Tom", "3"), // This should be "3" to correspond to the Chart component
-    getItem("Bill", "4"),
-    getItem("Alex", "5"),
-  ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
-  ]),
-  getItem("Files", "9", <FileOutlined />),
-  getItem("Chart", "10", <BarChartOutlined />), // Added Chart menu item
+  getItem("Dashboard", "1", <PieChartOutlined />),
+  // getItem("Profile", "3", <DesktopOutlined />),
+  getItem("User List", "5", <UserOutlined />),
+  getItem("Sell History", "2", <HistoryOutlined />),
+  getItem("Client Message", "6", <MessageOutlined />),
+  getItem("Revenues", "4", <FieldTimeOutlined />),
 ];
 
 const DashboardLayout = () => {
@@ -100,7 +102,7 @@ const DashboardLayout = () => {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+          Astarion ©{new Date().getFullYear()} Created by AborgCube
         </Footer>
       </Layout>
     </Layout>
