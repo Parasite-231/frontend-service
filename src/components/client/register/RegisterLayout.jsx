@@ -11,10 +11,7 @@ export default function RegisterLayout() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  const [selectedGender, setSelectedGender] = useState("");
-  const [genderWarning, setGenderWarning] = useState("");
-
-  
+  const [address, setAddress] = useState(""); // New address state
   const [mobileNumber, setMobileNumber] = useState("");
   const [mobileError, setMobileError] = useState("");
 
@@ -32,24 +29,16 @@ export default function RegisterLayout() {
     }
 
     // Email validation
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@dreamonline\.co\.jp$/;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     if (!emailPattern.test(email)) {
-      setEmailError("Please provide your organization email");
+      setEmailError("Please provide your gmail account");
       return;
     } else {
       setEmailError("");
     }
 
-    if (!selectedGender) {
-      setGenderWarning("Please choose your gender");
-      return;
-    } else {
-      setGenderWarning("");
-    }
     // Password validation
-    // const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z\d]{6,}$/;
     const passwordPattern = /^(?=.*[A-Z])(?=.*[0-9]).{6,15}$/;
-
     if (!passwordPattern.test(password)) {
       setPasswordError(
         "Password must contain at least 6 characters, including at least one uppercase letter and one numeric digit, and must not exceed 15 characters"
@@ -58,6 +47,7 @@ export default function RegisterLayout() {
     } else {
       setPasswordError("");
     }
+
     // Matching passwords validation
     if (password !== confirmPassword) {
       setConfirmPasswordError("Passwords do not match");
@@ -66,51 +56,13 @@ export default function RegisterLayout() {
       setConfirmPasswordError("");
     }
 
-    // if (
-    //   emailError === "" &&
-    //   passwordError === "" &&
-    //   employeeIdError === "" &&
-    //   confirmPasswordError === ""
-    // ) {
-    //   var encryptedPassword = CryptoJS.AES.encrypt(
-    //     JSON.stringify(password),
-    //     my_secret_key
-    //   ).toString();
+    // Optional address field validation
+    // You can add your validation rules for the address field here if needed
 
-    //   axios
-    //     .post(`${base_url}/api/v1/client/auth/registration`, {
-    //       name: name,
-    //       employee_id: employeeId,
-    //       email: email,
-    //       active: "pending",
-    //       gender: gender,
-    //       password: encryptedPassword,
-    //     })
-    //     .then((response) => {
-    //       if (
-    //         response.data.code === 200 &&
-    //         response.data.message === "User registered successfully"
-    //       ) {
-    //         setModalVisible(true);
-    //         setModalMessage("Registration successful !");
-    //         setRegistrationSuccess(true);
-
-    //         setTimeout(() => {
-    //           setModalVisible(false);
-    //           navigate("/login");
-    //         }, 3000);
-    //       } else if (response.status === 409) {
-    //         setModalVisible(true);
-    //         setModalMessage("User already exists");
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       setModalVisible(true);
-    //       setModalMessage("User already exists");
-    //       console.log(error);
-    //     });
-    // }
+    // Form submission logic
+    // Implement your form submission logic here
   };
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -118,12 +70,6 @@ export default function RegisterLayout() {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setEmailError("");
-  };
-
-  const handleGenderChange = (e) => {
-    const selectedValue = e.target.value;
-    setSelectedGender(selectedValue);
-    setGenderWarning("");
   };
 
   const handlePasswordChange = (e) => {
@@ -136,13 +82,18 @@ export default function RegisterLayout() {
     setConfirmPasswordError("");
   };
 
+  const handleAddressChange = (e) => {
+    setAddress(e.target.value);
+    // You can add address validation logic here if needed
+  };
+
   return (
     <>
       <div className="container-fluid">
         <div className="row no-gutter">
-          <div className="col-md-6 d-none d-md-flex bg-image-register"></div>
+          <div className="col-md-7 d-none d-md-flex bg-image-register"></div>
 
-          <div className="col-md-6 bg-light">
+          <div className="col-md-5 bg-light">
             <div className="login d-flex align-items-center py-5">
               <div className="container">
                 <div className="row">
@@ -162,24 +113,6 @@ export default function RegisterLayout() {
                           autoFocus
                           required
                         />
-                      </div>
-                      <div className="mb-3">
-                        <select
-                          className={`form-control rounded-pill border-0 shadow-sm px-4 ${
-                            genderWarning ? "is-invalid" : ""
-                          }`}
-                          value={selectedGender}
-                          onChange={handleGenderChange}
-                        >
-                          <option value="">Select your gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                        </select>
-                        {genderWarning && (
-                          <div className="invalid-feedback">
-                            {genderWarning}
-                          </div>
-                        )}
                       </div>
                       <div className="form-group mb-3">
                         <input
@@ -257,6 +190,19 @@ export default function RegisterLayout() {
                         )}
                       </div>
 
+                      <div className="mb-3">
+                        <textarea
+                          id="address"
+                          className="form-control rounded border-0 shadow-sm px-4"
+                          name="address"
+                          placeholder="Address (Optional)"
+                          value={address}
+                          onChange={handleAddressChange}
+                          style={{resize:"none"}}
+                          rows={4} // Increase the number of rows for the textarea
+                        ></textarea>
+                      </div>
+
                       <button
                         type="submit"
                         className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm w-100"
@@ -268,7 +214,7 @@ export default function RegisterLayout() {
                       Don't have an account ?{" "}
                       <NavLink to="/client/login">Sign In</NavLink>
                     </span>
-                    <span className="d-block text-center my-4 text-muted">
+                    {/* <span className="d-block text-center my-4 text-muted">
                       &mdash; or &mdash;
                     </span>
                     <div className="social-login">
@@ -293,7 +239,7 @@ export default function RegisterLayout() {
                         <span className="icon-google mr-3"></span> Register with
                         Google
                       </a>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

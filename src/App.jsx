@@ -14,10 +14,10 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/client/login" element={<LoginPage />} />
           <Route path="/client/register" element={<RegisterPage />} />
-          <Route path="/home" element={<HomePage />} />
+          {/* <Route path="/home" element={<HomePage />} /> */}
           <Route
             path="/client/otp-verification"
             element={<OTPVerificationPage />}

@@ -3,18 +3,15 @@ import { NavLink } from "react-router-dom";
 
 export default function LoginLayout() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [rememberMe, setRememberMe] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Email validation
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@dreamonline\.co\.jp$/;
+   const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     if (!emailPattern.test(email)) {
-      setEmailError("Please provide your organization email");
+      setEmailError("Please provide your gmail account");
       return;
     } else {
       setEmailError("");
@@ -26,18 +23,13 @@ export default function LoginLayout() {
     setEmailError("");
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    setPasswordError("");
-  };
-
   return (
     <>
       <div className="container-fluid">
         <div className="row no-gutter">
-          <div className="col-md-6 d-none d-md-flex bg-image"></div>
+          <div className="col-md-7 d-none d-md-flex bg-image"></div>
 
-          <div className="col-md-6 bg-light">
+          <div className="col-md-5 bg-light">
             <div className="login d-flex align-items-center py-5">
               <div className="container">
                 <div className="row">
@@ -70,8 +62,6 @@ export default function LoginLayout() {
                           required
                           className="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
                           name="password"
-                          value={password}
-                          onChange={handlePasswordChange}
                         />
                       </div>
                       <div className="custom-control custom-checkbox mb-3">
@@ -98,7 +88,7 @@ export default function LoginLayout() {
                       Don't have an account ?{" "}
                       <NavLink to="/client/register">Sign Up</NavLink>
                     </span>
-                    <span className="d-block text-center my-4 text-muted">
+                    {/* <span className="d-block text-center my-4 text-muted">
                       &mdash; or &mdash;
                     </span>
                     <div className="social-login">
@@ -123,7 +113,7 @@ export default function LoginLayout() {
                         <span className="icon-google mr-3"></span> Login with
                         Google
                       </a>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
