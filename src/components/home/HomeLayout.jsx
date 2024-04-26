@@ -122,7 +122,7 @@ export default function HomeLayout() {
 
       <AboutSection />
 
-      <BlogSection />
+      {/* <BlogSection /> */}
 
       <TestimonialSection />
 

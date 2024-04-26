@@ -6,7 +6,7 @@ export default function NavBarLayout() {
     <>
       <header className="header_section long_section px-0">
         <nav className="navbar navbar-expand-lg custom_nav-container">
-          <NavLink className="navbar-brand" to="/client/home">
+          <NavLink className="navbar-brand" to="/home">
             <span>Astarion</span>
           </NavLink>
           <button
@@ -29,25 +29,21 @@ export default function NavBarLayout() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/client/about">
+                  <NavLink className="nav-link" href="/client/about">
                     {" "}
                     About
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/client/sells">
+                  <NavLink className="nav-link" to="/client/car-sell">
                     Sell Posts
                   </NavLink>
                 </li>
-                <li className="nav-item active">
-                  <a className="nav-link" href="blog.html">
-                    Blog
-                  </a>
-                </li>
+                
                 <li className="nav-item">
-                  <a className="nav-link" href="contact.html">
+                  <NavLink className="nav-link" href="/contact">
                     Contact Us
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </div>

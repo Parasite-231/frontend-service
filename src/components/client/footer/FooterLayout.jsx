@@ -1,111 +1,139 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import cp2 from "../../../assets/img/cp2.jpg";
 
 export default function FooterLayout() {
   return (
     <>
-      <section className="info_section long_section">
-        <div className="container">
-          <div className="contact_nav">
-            <a href="">
-              <i className="fa fa-phone" aria-hidden="true"></i>
-              <span>Call : +01 123455678990</span>
-            </a>
-            <a href="">
-              <i className="fa fa-envelope" aria-hidden="true"></i>
-              <span>Email : demo@gmail.com</span>
-            </a>
-            <a href="">
-              <i className="fa fa-map-marker" aria-hidden="true"></i>
-              <span>Location</span>
-            </a>
-          </div>
-
-          <div className="info_top">
-            <div className="row">
-              <div className="col-sm-6 col-md-4 col-lg-3">
-                <div className="info_links">
-                  <h4>QUICK LINKS</h4>
-                  <div className="info_links_menu">
-                    <a className="" href="index.html">
-                      Home <span className="sr-only">(current)</span>
-                    </a>
-                    <a className="" href="about.html">
-                      {" "}
+      <div className="container-fluid my-3">
+        <footer
+          className="text-center text-lg-start text-white"
+          style={{ backgroundColor: "black" }}
+        >
+          <section
+            className="d-flex justify-content-between p-4"
+            style={{ backgroundColor: "#8FC8CD" }}
+          >
+            <div className="me-5">
+              <span>Get Connected with us </span>
+            </div>
+            <div>
+              <a href="" className="text-white me-4">
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="" className="text-white me-4">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="" className="text-white me-4">
+                <i className="fab fa-google"></i>
+              </a>
+              <a href="" className="text-white me-4">
+                <i className="fab fa-instagram"></i>
+              </a>
+              <a href="" className="text-white me-4">
+                <i className="fab fa-linkedin"></i>
+              </a>
+              <a href="" className="text-white me-4">
+                <i className="fab fa-github"></i>
+              </a>
+            </div>
+          </section>
+          <section className="">
+            <div className="container text-center text-md-start mt-5">
+              <div className="row mt-3">
+                <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                  <h6 className="text-uppercase fw-bold">Astarion</h6>
+                  <hr
+                    className="mb-4 mt-0 d-inline-block mx-auto"
+                    style={{
+                      width: "60px",
+                      backgroundColor: "#7c4dff",
+                      height: "2px",
+                    }}
+                  />
+                  <p>
+                    Welcome to our platform where you can buy and sell cars
+                    hassle-free. Find the perfect car for your needs or list
+                    your own car for sale. Our platform connects buyers and
+                    sellers to make the car buying and selling process easier
+                    and more convenient.
+                  </p>
+                </div>
+                <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                  <h6 className="text-uppercase fw-bold">Quick links</h6>
+                  <hr
+                    className="mb-4 mt-0 d-inline-block mx-auto"
+                    style={{
+                      width: "60px",
+                      backgroundColor: "#7c4dff",
+                      height: "2px",
+                    }}
+                  />
+                  <p>
+                    <NavLink to="/home" className="text-white">
+                      Home
+                    </NavLink>
+                  </p>
+                  <p>
+                    <NavLink to="/client/car-sell" className="text-white">
+                      Sell Posts
+                    </NavLink>
+                  </p>
+                  <p>
+                    <NavLink to="/about" className="text-white">
                       About
-                    </a>
-                    <a className="" href="furniture.html">
-                      Furniture
-                    </a>
-                    <a className="" href="blog.html">
-                      Blog
-                    </a>
-                    <a className="" href="contact.html">
+                    </NavLink>
+                  </p>
+                  <p>
+                    <NavLink to="/contact" className="text-white">
                       Contact Us
-                    </a>
-                  </div>
+                    </NavLink>
+                  </p>
                 </div>
-              </div>
-              <div className="col-sm-6 col-md-4 col-lg-3 mx-auto">
-                <div className="info_post">
-                  <h5>INSTAGRAM FEEDS</h5>
-                  <div className="post_box">
-                    <div className="img-box">
-                      <img src="images/f1.png" alt="" />
-                    </div>
-                    <div className="img-box">
-                      <img src="images/f2.png" alt="" />
-                    </div>
-                    <div className="img-box">
-                      <img src="images/f3.png" alt="" />
-                    </div>
-                    <div className="img-box">
-                      <img src="images/f4.png" alt="" />
-                    </div>
-                    <div className="img-box">
-                      <img src="images/f5.png" alt="" />
-                    </div>
-                    <div className="img-box">
-                      <img src="images/f6.png" alt="" />
-                    </div>
-                  </div>
+                <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                  <h6 className="text-uppercase fw-bold">Contact</h6>
+                  <hr
+                    className="mb-4 mt-0 d-inline-block mx-auto"
+                    style={{
+                      width: "60px",
+                      backgroundColor: "#7c4dff",
+                      height: "2px",
+                    }}
+                  />
+                  <p>
+                    <i className="fas fa-home mr-3"></i> Address: BoardBazar,
+                    Gazipur, Bangladesh
+                  </p>
+                  <p>
+                    <i className="fas fa-envelope mr-3"></i> Mail:
+                    aborgcube@gmail.com
+                  </p>
+                  <p>
+                    <i className="fas fa-phone mr-3"></i> Phone: +880-1306989578
+                  </p>
                 </div>
-              </div>
-              <div className="col-md-4">
-                <div className="info_form">
-                  <h4>SIGN UP TO OUR NEWSLETTER</h4>
-                  <form action="">
-                    <input type="text" placeholder="Enter Your Email" />
-                    <button type="submit">Subscribe</button>
-                  </form>
-                  <div className="social_box">
-                    <a href="">
-                      <i className="fa fa-facebook" aria-hidden="true"></i>
-                    </a>
-                    <a href="">
-                      <i className="fa fa-twitter" aria-hidden="true"></i>
-                    </a>
-                    <a href="">
-                      <i className="fa fa-linkedin" aria-hidden="true"></i>
-                    </a>
-                    <a href="">
-                      <i className="fa fa-instagram" aria-hidden="true"></i>
-                    </a>
-                  </div>
+                <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+                  <img
+                    src={cp2}
+                    className="img-fluid"
+                    alt="Astarion"
+                    width="600px"
+                  />
                 </div>
               </div>
             </div>
+          </section>
+          <div
+            className="text-center p-3"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          >
+            © 2020 Copyright:&nbsp;
+            <NavLink className="text-white" to="/home">
+              AborgCube
+            </NavLink>
           </div>
-        </div>
-      </section>
-
-      <footer className="footer_section">
-        <div className="container">
-          <p>
-            &copy; <span id="displayYear"></span> All Rights Reserved By{" "}
-            <a href="https://html.design/">Free Html Templates</a>
-          </p>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </>
   );
 }
