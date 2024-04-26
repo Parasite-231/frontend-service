@@ -141,8 +141,9 @@ export default function OTPVerificationLayout() {
                       borderRadius: "0.5rem",
                       cursor: "pointer",
                       transition: "background-color 0.3s ease",
+                      background: "#8FC8CD",
                     }}
-                    className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm w-100"
+                    className="btn btn-block text-uppercase mb-2 rounded-pill shadow-sm w-100"
                     type="submit"
                   >
                     Verify OTP
