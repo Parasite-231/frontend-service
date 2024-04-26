@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Upload, message } from "antd";
 import ImgCrop from "antd-img-crop";
 import NavBarLayout from "../nav/NavBarLayout";
@@ -7,6 +7,7 @@ import "../../../styles/home/HomeStyle.css";
 // import b1 from "../../../assets/img/b1.jpg";
 // import cp from "../../../assets/img/cp.jpg";
 import mu from "../../../assets/img/mu.jpg";
+import axios from "axios";
 export default function ProfileLayout() {
   const [fileList, setFileList] = useState([]);
   const [name, setName] = useState("");
@@ -15,6 +16,34 @@ export default function ProfileLayout() {
   const [nid, setNid] = useState("");
   const [optionalAddress, setOptionalAddress] = useState("");
   const [mandatoryAddress, setMandatoryAddress] = useState("");
+
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = sessionStorage.getItem("accessToken");
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/api/user`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const userData = response.data;
+        setEmail(userData.email);
+        setName(userData.name);
+        setPhone(userData.phoneNumber);
+        setNid(userData.nid);
+        setMandatoryAddress(userData.address);
+        console.log(userData)
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import c1test from "../../../assets/img/c1test2.jpg"; // Importing sample image for testing
 import t2 from "../../../assets/img/t2.jpg";
@@ -6,14 +6,27 @@ import FooterLayout from "../footer/FooterLayout";
 import NavBarLayout from "../nav/NavBarLayout";
 
 export default function CarDetailsLayout() {
-  const { id } = useParams();
+  const {
+    id,
+    model,
+    color,
+    year,
+    mileage,
+    price,
+    paper,
+    accidentHistory,
+    sellerName,
+    sellerEmail,
+    sellerPhoneNumber,
+    sellerAddress,
+  } = useParams();
 
-  // Define images in state
-  const [images, setImages] = useState([
-    c1test, // Sample image for testing
-    c1test, // Sample image for testing
-    c1test, // Sample image for testing
-  ]);
+  // Define images in state (if required)
+  // const [images, setImages] = useState([
+  //   c1test, // Sample image for testing
+  //   c1test, // Sample image for testing
+  //   c1test, // Sample image for testing
+  // ]);
 
   return (
     <>
@@ -29,7 +42,7 @@ export default function CarDetailsLayout() {
               <div className="col-md-6">
                 {/* Main Image */}
                 <img
-                  src={images[0]} // Using the first image as the main image
+                  src={c1test} // Sample image
                   alt={`Car 1`}
                   className="img-fluid mb-3"
                   style={{ width: "80%", height: "auto" }}
@@ -39,7 +52,7 @@ export default function CarDetailsLayout() {
                 <div className="row">
                   <div className="col-md-6 mb-3">
                     <img
-                      src={images[1]} // Using the second image
+                      src={c1test} // Sample image
                       alt={`Car 2`}
                       className="img-fluid"
                       style={{ width: "90%", height: "auto" }}
@@ -47,7 +60,7 @@ export default function CarDetailsLayout() {
                   </div>
                   <div className="col-md-6 mb-3">
                     <img
-                      src={images[2]} // Using the third image
+                      src={c1test} // Sample image
                       alt={`Car 3`}
                       className="img-fluid"
                       style={{ width: "90%", height: "auto" }}
@@ -60,9 +73,7 @@ export default function CarDetailsLayout() {
               <div className="col-md-6">
                 <div className="card">
                   <div className="card-body">
-                    <h5 className="card-title" style={{ background: "" }}>
-                      Car Details
-                    </h5>
+                    <h5 className="card-title">Car Details</h5>
                     <hr />
                     <table className="table table-striped">
                       <tbody>
@@ -70,43 +81,43 @@ export default function CarDetailsLayout() {
                           <td>
                             <b>Car Model:</b>
                           </td>
-                          <td>Toyota Corolla Axio</td>
+                          <td>{model}</td>
                         </tr>
                         <tr>
                           <td>
                             <b>Car Color:</b>
                           </td>
-                          <td>Red</td>
+                          <td>{color}</td>
                         </tr>
                         <tr>
                           <td>
                             <b>Registration Year:</b>
                           </td>
-                          <td>2020</td>
+                          <td>{year}</td>
                         </tr>
                         <tr>
                           <td>
                             <b>Mileage:</b>
                           </td>
-                          <td>30,000 km</td>
+                          <td>{mileage}</td>
                         </tr>
                         <tr>
                           <td>
                             <b>Price:</b>
                           </td>
-                          <td>$15,000</td>
+                          <td>${price}</td>
                         </tr>
                         <tr>
                           <td>
                             <b>Paper:</b>
                           </td>
-                          <td>Clean</td>
+                          <td>{paper}</td>
                         </tr>
                         <tr>
                           <td>
                             <b>Accident History:</b>
                           </td>
-                          <td>None</td>
+                          <td>{accidentHistory}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -117,9 +128,9 @@ export default function CarDetailsLayout() {
                   <div className="row g-0">
                     <div className="col-md-4">
                       <img
-                        src={t2} // Replace "..." with the URL of the car image
+                        src={t2} // Sample image
                         className="img-fluid rounded-start"
-                        alt="Car Image"
+                        alt="Seller Image"
                       />
                     </div>
                     <div className="col-md-8">
@@ -132,25 +143,25 @@ export default function CarDetailsLayout() {
                               <td>
                                 <b>Name:</b>
                               </td>
-                              <td>John Doe</td>
+                              <td>{sellerName}</td>
                             </tr>
                             <tr>
                               <td>
                                 <b>Email:</b>
                               </td>
-                              <td>johndoe@example.com</td>
+                              <td>{sellerEmail}</td>
                             </tr>
                             <tr>
                               <td>
                                 <b>Phone Number:</b>
                               </td>
-                              <td>+1234567890</td>
+                              <td>{sellerPhoneNumber}</td>
                             </tr>
                             <tr>
                               <td>
                                 <b>Address:</b>
                               </td>
-                              <td>New York, USA</td>
+                              <td>{sellerAddress}</td>
                             </tr>
                           </tbody>
                         </table>

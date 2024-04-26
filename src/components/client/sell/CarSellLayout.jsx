@@ -1,19 +1,21 @@
-import { Upload, message } from "antd";
-import ImgCrop from "antd-img-crop";
 import React, { useState } from "react";
+import { Upload, message, Spin } from "antd";
+import ImgCrop from "antd-img-crop";
+import axios from "axios";
 import "../../../styles/home/HomeStyle.css";
 import FooterLayout from "../footer/FooterLayout";
 import NavBarLayout from "../nav/NavBarLayout";
 
 export default function CarSellLayout() {
   const [fileList, setFileList] = useState([]);
-  const [carModel, setCarModel] = useState("");
-  const [carColor, setCarColor] = useState("");
-  const [registrationYear, setRegistrationYear] = useState("");
+  const [model, setCarModel] = useState("");
+  const [color, setCarColor] = useState("");
+  const [year, setRegistrationYear] = useState("");
   const [mileage, setMileage] = useState("");
   const [price, setPrice] = useState("");
   const [paper, setPaper] = useState("");
-  const [accidentHistory, setAccidentHistory] = useState("");
+  const [accident, setAccidentHistory] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -34,30 +36,115 @@ export default function CarSellLayout() {
     imgWindow?.document.write(image.outerHTML);
   };
 
-  const handleSubmit = (e) => {
+  const handleImageSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      fileList.forEach((file) => {
+        formData.append("files", file.originFileObj, 1);
+      });
+      const token = sessionStorage.getItem("accessToken");
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/product/upload-image`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      message.success("Images uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      message.error("Error uploading images");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCarDetailsSubmit = async (e) => {
     e.preventDefault();
     // Validate all fields
     if (
-      !carModel ||
-      !carColor ||
-      !registrationYear ||
+      !model ||
+      !color ||
+      !year ||
       !mileage ||
       !price ||
       !paper ||
-      !accidentHistory
+      !accident
     ) {
       message.error({
         content: "All fields are required",
         style: {
-          backgroundColor: "#ff4d4f", // Red background color
+          backgroundColor: "#ff4d4f",
         },
       });
       return;
     }
-    // If all validations pass, submit successful
-    message.success("Car details submitted successfully");
-    // Implement your form submission logic here
+    try {
+      setLoading(true);
+      const token = sessionStorage.getItem("accessToken");
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/product/post`,
+        {
+          model,
+          color,
+          year,
+          mileage,
+          price,
+          paper,
+          accident,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      message.success("Car details submitted successfully");
+      // Extract car ID from the response
+      const carId = response.data.id;
+      console.log("Car details submit response:", response.data);
+      // Use the car ID to upload images
+      await uploadImages(carId);
+    } catch (error) {
+      console.error("Error submitting car details:", error);
+      message.error("Error submitting car details");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const uploadImages = async (carId) => {
+   try {
+    setLoading(true);
+    const formData = new FormData();
+    fileList.forEach((file) => {
+      formData.append("files", file.originFileObj, carId);
+    });
+    const token = sessionStorage.getItem("accessToken");
+    await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/api/product/upload-image/text`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    message.success("Images uploaded successfully");
+  } catch (error) {
+    console.error("Error uploading images:", error);
+    message.error("Error uploading images");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <>
@@ -70,52 +157,56 @@ export default function CarSellLayout() {
           </div>
           <div className="row" style={{ marginTop: "30px" }}>
             <div className="col-md-6">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleImageSubmit}>
                 <div className="text-center mb-3">
-               
                   <ImgCrop rotationSlider>
                     <Upload
-                      action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                      action=""
                       listType="picture-card"
-                      
                       fileList={fileList}
                       onChange={onChange}
                       onPreview={onPreview}
-                      
                     >
                       {fileList.length < 3 && "+ Upload"}
                     </Upload>
                   </ImgCrop>
-                
                   {fileList.length >= 3 && (
                     <p style={{ color: "red", margin: "40px" }}>
                       You can add at most 3 images of your car
                     </p>
                   )}
                 </div>
+                <button
+                  className="btn btn-block"
+                  type="submit"
+                  style={{ background: "#8FC8CD", color: "white" }}
+                  disabled={loading}
+                >
+                  {loading ? <Spin /> : "Upload Images"}
+                </button>
               </form>
             </div>
             <div className="col-md-6">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleCarDetailsSubmit}>
                 <input
                   type="text"
                   placeholder="Car Model"
                   className="form-control mb-3"
-                  value={carModel}
+                  value={model}
                   onChange={(e) => setCarModel(e.target.value)}
                 />
                 <input
                   type="text"
                   placeholder="Car Color"
                   className="form-control mb-3"
-                  value={carColor}
+                  value={color}
                   onChange={(e) => setCarColor(e.target.value)}
                 />
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Registration Year"
                   className="form-control mb-3"
-                  value={registrationYear}
+                  value={year}
                   onChange={(e) => setRegistrationYear(e.target.value)}
                 />
                 <input
@@ -126,9 +217,10 @@ export default function CarSellLayout() {
                   onChange={(e) => setMileage(e.target.value)}
                 />
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Price"
                   className="form-control mb-3"
+                 
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
@@ -143,7 +235,7 @@ export default function CarSellLayout() {
                   placeholder="Accident History"
                   className="form-control mb-3"
                   rows="4"
-                  value={accidentHistory}
+                  value={accident}
                   onChange={(e) => setAccidentHistory(e.target.value)}
                   required
                 ></textarea>
@@ -151,8 +243,9 @@ export default function CarSellLayout() {
                   className="btn btn-block"
                   type="submit"
                   style={{ background: "#8FC8CD", color: "white" }}
+                  disabled={loading}
                 >
-                  Create Sell Post
+                  {loading ? <Spin /> : "Create Sell Post"}
                 </button>
               </form>
             </div>

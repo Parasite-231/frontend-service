@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function RegisterLayout() {
   const [name, setName] = useState("");
@@ -11,9 +13,11 @@ export default function RegisterLayout() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  const [address, setAddress] = useState(""); // New address state
+  const [address, setAddress] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [mobileError, setMobileError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,11 +60,30 @@ export default function RegisterLayout() {
       setConfirmPasswordError("");
     }
 
-    // Optional address field validation
-    // You can add your validation rules for the address field here if needed
-
-    // Form submission logic
-    // Implement your form submission logic here
+    // Make a POST request to register
+    axios
+      .post(`${import.meta.env.VITE_BASE_URL}/api/auth/signup`, {
+        name: name,
+        email: email,
+        password: password,
+        mobileNumber: mobileNumber,
+        address: address,
+      })
+      .then((response) => {
+       
+        console.log(response)
+          toast.success("Registration successful!"); // Display success message
+          setTimeout(() => {
+            navigate("/client/login"); // Redirect to login after a delay
+        }, 3000);
+        // navigate("/client/login")
+       
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error during registration:", error);
+        // toast.error("Registration unsuccessful!");
+      });
   };
 
   const handleNameChange = (e) => {
@@ -89,6 +112,7 @@ export default function RegisterLayout() {
 
   return (
     <>
+      <ToastContainer position="bottom-right" />
       <div className="container-fluid">
         <div className="row no-gutter">
           <div className="col-md-7 d-none d-md-flex bg-image-register"></div>
@@ -206,7 +230,7 @@ export default function RegisterLayout() {
                       <button
                         type="submit"
                         className="btn btn-block text-uppercase mb-2 rounded-pill shadow-sm w-100"
-                        style={{ background: "#8FC8CD" , color:"white"}}
+                        style={{ background: "#8FC8CD", color: "white" }}
                       >
                         Sign Up
                       </button>
