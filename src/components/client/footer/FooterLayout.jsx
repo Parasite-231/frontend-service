@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import cp2 from "../../../assets/img/cp2.jpg";
-import ff from "../../../assets/img/ff.jpg"
 
 export default function FooterLayout() {
   return (
@@ -102,18 +101,24 @@ export default function FooterLayout() {
                     }}
                   />
                   <p>
-                    <i className="fas fa-home mr-3"></i> Address: BoardBazar, Gazipur,
-                    Bangladesh
+                    <i className="fas fa-home mr-3"></i> Address: BoardBazar,
+                    Gazipur, Bangladesh
                   </p>
                   <p>
-                    <i className="fas fa-envelope mr-3"></i> Mail: aborgcube@gmail.com
+                    <i className="fas fa-envelope mr-3"></i> Mail:
+                    aborgcube@gmail.com
                   </p>
                   <p>
                     <i className="fas fa-phone mr-3"></i> Phone: +880-1306989578
                   </p>
                 </div>
                 <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
-                  <img src={cp2} className="img-fluid" alt="Astarion" width="600px" />
+                  <img
+                    src={cp2}
+                    className="img-fluid"
+                    alt="Astarion"
+                    width="600px"
+                  />
                 </div>
               </div>
             </div>
