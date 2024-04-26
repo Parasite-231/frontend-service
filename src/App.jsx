@@ -1,19 +1,18 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import DashboardPage from "./pages/admin/DashboardPage";
-import LoginPage from "./pages/client/LoginPage";
-import OTPVerificationPage from "./pages/client/OTPVerificationPage";
-import RegisterPage from "./pages/client/RegisterPage";
-import "./styles/client/auth.css";
-import HomePage from "./pages/home/HomePage";
+import GetUser from "./components/admin/dashboard/GetUser";
 import CVLayout from "./components/cv generator/CVLayout";
 import Collection from "./components/cv generator/Collection";
-import GetUser from "./components/admin/dashboard/GetUser";
-import OTPSuccessMesage from "./components/success/OTPSuccessMesage";
-import OTPSuccessPage from "./pages/success/OTPSuccessPage";
+import DashboardPage from "./pages/admin/DashboardPage";
+import CarSellPage from "./pages/client/CarSellPage";
+import LoginPage from "./pages/client/LoginPage";
+import OTPVerificationPage from "./pages/client/OTPVerificationPage";
+import ProfilePage from "./pages/client/ProfilePage";
+import RegisterPage from "./pages/client/RegisterPage";
 import ErrorPage from "./pages/error/ErrorPage";
 import ErrorServerPage from "./pages/error/ErrorServerPage";
-import ProfilePage from "./pages/client/ProfilePage";
-import CarSellPage from "./pages/client/CarSellPage";
+import HomePage from "./pages/home/HomePage";
+import OTPSuccessPage from "./pages/success/OTPSuccessPage";
+import "./styles/client/auth.css";
 
 function App() {
   return (
@@ -31,6 +30,9 @@ function App() {
           <Route path="/client/otp-verified" element={<OTPSuccessPage />} />
           <Route path="/client/profile" element={<ProfilePage />} />
           <Route path="/client/car-sell" element={<CarSellPage />} />
+
+          {/* admin */}
+
           <Route path="/admin/dashboard" element={<DashboardPage />} />
           <Route path="/generate/:id" element={<CVLayout />} />
           <Route path="/collection" element={<Collection />} />
