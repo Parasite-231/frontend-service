@@ -12,7 +12,8 @@ import OTPSuccessMesage from "./components/success/OTPSuccessMesage";
 import OTPSuccessPage from "./pages/success/OTPSuccessPage";
 import ErrorPage from "./pages/error/ErrorPage";
 import ErrorServerPage from "./pages/error/ErrorServerPage";
-import ProfilePage from "./pages/profile/ProfilePage";
+import ProfilePage from "./pages/client/ProfilePage";
+import CarSellPage from "./pages/client/CarSellPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           />
           <Route path="/client/otp-verified" element={<OTPSuccessPage />} />
           <Route path="/client/profile" element={<ProfilePage />} />
+          <Route path="/client/car-sell" element={<CarSellPage />} />
           <Route path="/admin/dashboard" element={<DashboardPage />} />
           <Route path="/generate/:id" element={<CVLayout />} />
           <Route path="/collection" element={<Collection />} />
