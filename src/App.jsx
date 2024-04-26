@@ -29,7 +29,10 @@ function App() {
           <Route path="/client/otp-verified" element={<OTPSuccessPage />} />
           <Route path="/client/profile" element={<ProfilePage />} />
           <Route path="/client/car-sell" element={<CarSellPage />} />
-          <Route path="/client/car-details/:id" element={<CarDetailsPage />} />
+          <Route
+            path="/client/car-details/:id/:model/:color/:year/:mileage/:price/:paper/:accidentHistory/:sellerName/:sellerEmail/:sellerPhoneNumber/:sellerAddress"
+            element={<CarDetailsPage />}
+          />
 
           {/* admin */}
 
