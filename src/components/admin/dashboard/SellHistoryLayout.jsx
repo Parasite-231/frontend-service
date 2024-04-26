@@ -1,15 +1,15 @@
-import { Divider, Table } from "antd";
-import React from "react";
+import { Divider, Spin, Table } from "antd";
+import React, { useState } from "react";
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
+    title: "Seller Name",
+    dataIndex: "seller",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: "Age",
-    dataIndex: "age",
+    title: "Email",
+    dataIndex: "email",
   },
   {
     title: "Address",
@@ -20,86 +20,111 @@ const columns = [
 const data = [
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-  },
-
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
+    seller: "Abir",
+    email: "abir@gmail.com",
     address: "New York No. 1 Lake Park",
   },
-  // Additional data omitted for brevity
+  {
+    key: "1",
+    seller: "Abir",
+    email: "abir@gmail.com",
+    address: "New York No. 1 Lake Park",
+  },
+  {
+    key: "1",
+    seller: "Abir",
+    email: "abir@gmail.com",
+    address: "New York No. 1 Lake Park",
+  },
+  {
+    key: "1",
+    seller: "Abir",
+    email: "abir@gmail.com",
+    address: "New York No. 1 Lake Park",
+  },
+  {
+    key: "1",
+    seller: "Abir",
+    email: "abir@gmail.com",
+    address: "New York No. 1 Lake Park",
+  },
 ];
 
 const SellHistoryLayout = () => {
+  const [loading, setLoading] = useState(true); // Loading state
+
+  // Simulate data loading delay
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000); // 1 second delay
+
   return (
     <>
       <div>
         <Divider />
-        <Table columns={columns} dataSource={data} />
+        <Spin spinning={loading} size="large">
+          <Table columns={columns} dataSource={data} />
+        </Spin>
       </div>
     </>
   );

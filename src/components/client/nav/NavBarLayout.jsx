@@ -1,7 +1,23 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function NavBarLayout() {
+  // Parse clientInfo from session storage
+  const clientInfo = JSON.parse(sessionStorage.getItem("clientInfo"));
+  // Check if user is authenticated
+  const isAuthenticated = clientInfo && clientInfo.auth === true;
+
+  // Get navigate function from useNavigate hook
+  const navigate = useNavigate();
+
+  // Function to handle logout
+  const handleLogout = () => {
+    // Clear session storage
+    sessionStorage.clear();
+    // Redirect to login page using navigate function
+    navigate("/client/login");
+  };
+
   return (
     <>
       <header className="header_section long_section px-0">
@@ -29,8 +45,7 @@ export default function NavBarLayout() {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" href="/client/about">
-                    {" "}
+                  <NavLink className="nav-link" to="/client/about">
                     About
                   </NavLink>
                 </li>
@@ -39,19 +54,26 @@ export default function NavBarLayout() {
                     Sell Posts
                   </NavLink>
                 </li>
-                
+
                 <li className="nav-item">
-                  <NavLink className="nav-link" href="/contact">
+                  <NavLink className="nav-link" to="/contact">
                     Contact Us
                   </NavLink>
                 </li>
               </ul>
             </div>
             <div className="quote_btn-container">
-              <NavLink to="/client/login">
-                <span>Login</span>
-                <i className="fa fa-user" aria-hidden="true"></i>
-              </NavLink>
+              {/* Check authentication status */}
+              {isAuthenticated ? (
+                <NavLink to="/" onClick={handleLogout}>
+                  <span>Logout</span>
+                </NavLink>
+              ) : (
+                <NavLink to="/client/login">
+                  <span>Login</span>
+                  <i className="fa fa-user" aria-hidden="true"></i>
+                </NavLink>
+              )}
               {/* <form className="form-inline">
                 <button
                   className="btn my-2 my-sm-0 nav_search-btn"
