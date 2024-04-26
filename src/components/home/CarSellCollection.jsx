@@ -31,6 +31,7 @@ export default function CarSellCollection() {
 
         if (response.data && Array.isArray(response.data.data)) {
           setSellPosts(response.data.data);
+          console.log(response.data.data)
         } else {
           console.error("Response data is not an array:", response.data);
         }
@@ -81,7 +82,7 @@ export default function CarSellCollection() {
                           <span>$</span> {post.price}
                         </h6>
                         <NavLink
-                          to={`/client/car-details/${post.id}/${post.model}/${post.color}/${post.year}/${post.mileage}/${post.price}/${post.paper}/${post.accidentHistory}/${post.sellerName}/${post.sellerEmail}/${post.sellerPhoneNumber}/${post.sellerAddress}`}
+                          to={`/client/car-details/${post.id}/${post.ownerEmail}/${post.model}/${post.color}/${post.year}/${post.mileage}/${post.price}/${post.paper}/${post.accidentHistory}/${post.sellerName}/${post.sellerEmail}/${post.sellerPhoneNumber}/${post.sellerAddress}`}
                           className="btn"
                           style={{ backgroundColor: "#8FC8CD", color: "white" }}
                         >

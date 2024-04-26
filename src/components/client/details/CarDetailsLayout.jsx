@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import c1test from "../../../assets/img/c1test2.jpg"; // Importing sample image for testing
 import t2 from "../../../assets/img/t2.jpg";
 import FooterLayout from "../footer/FooterLayout";
@@ -8,6 +9,7 @@ import NavBarLayout from "../nav/NavBarLayout";
 export default function CarDetailsLayout() {
   const {
     id,
+    ownerEmail,
     model,
     color,
     year,
@@ -21,12 +23,26 @@ export default function CarDetailsLayout() {
     sellerAddress,
   } = useParams();
 
-  // Define images in state (if required)
-  // const [images, setImages] = useState([
-  //   c1test, // Sample image for testing
-  //   c1test, // Sample image for testing
-  //   c1test, // Sample image for testing
-  // ]);
+  // State to store owner information
+  const [ownerInfo, setOwnerInfo] = useState(null);
+
+useEffect(() => {
+  const fetchOwnerInfo = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/api/user/info?email=${ownerEmail}`
+      );
+      console.log("Owner Info Response:", response); // Log the response
+      setOwnerInfo(response.data);
+    } catch (error) {
+      console.error("Error fetching owner information:", error);
+    }
+  };
+
+  fetchOwnerInfo();
+}, [ownerEmail]);
+
+
 
   return (
     <>
@@ -127,6 +143,7 @@ export default function CarDetailsLayout() {
                 <div className="card" style={{ marginTop: "40px" }}>
                   <div className="row g-0">
                     <div className="col-md-4">
+                      {/* Display the seller's image here */}
                       <img
                         src={t2} // Sample image
                         className="img-fluid rounded-start"
@@ -143,25 +160,33 @@ export default function CarDetailsLayout() {
                               <td>
                                 <b>Name:</b>
                               </td>
-                              <td>{sellerName}</td>
+                              <td>{ownerInfo ? ownerInfo.name : sellerName}</td>
                             </tr>
                             <tr>
                               <td>
                                 <b>Email:</b>
                               </td>
-                              <td>{sellerEmail}</td>
+                              <td>
+                                {ownerInfo ? ownerInfo.email : sellerEmail}
+                              </td>
                             </tr>
                             <tr>
                               <td>
                                 <b>Phone Number:</b>
                               </td>
-                              <td>{sellerPhoneNumber}</td>
+                              <td>
+                                {ownerInfo
+                                  ? ownerInfo.phoneNumber
+                                  : sellerPhoneNumber}
+                              </td>
                             </tr>
                             <tr>
                               <td>
                                 <b>Address:</b>
                               </td>
-                              <td>{sellerAddress}</td>
+                              <td>
+                                {ownerInfo ? ownerInfo.address : sellerAddress}
+                              </td>
                             </tr>
                           </tbody>
                         </table>
@@ -169,6 +194,8 @@ export default function CarDetailsLayout() {
                     </div>
                   </div>
                 </div>
+
+                
               </div>
             </div>
           </div>
