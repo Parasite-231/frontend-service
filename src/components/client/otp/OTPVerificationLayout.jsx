@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import otpVerify from "../../../assets/img/otp.png";
-// import verified from "../../../assets/icon/verified.png";
-// import HeaderCompanyLogo from "./HeaderCompanyLogo";
+import mailVerifyForOTP from "../../../assets/img/mail.png";
+import { NavLink } from "react-router-dom";
 
 export default function OTPVerificationLayout() {
   const [otp, setOtp] = useState(Array(6).fill(""));
+  const [otpError, setOtpError] = useState("");
   const inputsRef = useRef([]);
-
-  const otpSentNumber = "+880********";
 
   useEffect(() => {
     inputsRef.current[0].focus();
@@ -21,7 +19,7 @@ export default function OTPVerificationLayout() {
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-
+    setOtpError("");
     if (value !== "" && index < 5) {
       inputsRef.current[index + 1].focus();
     }
@@ -42,12 +40,13 @@ export default function OTPVerificationLayout() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const code = otp.join("");
-    alert(`OTP entered: ${code}`);
+    if (code.length < 6) {
+      setOtpError("Please enter the complete OTP");
+    } else {
+      // Redirect to "/home"
+      document.getElementById("homeNavLink").click();
+    }
   };
-
-  // const handleResend = () => {
-  //   alert("OTP resent");
-  // };
 
   return (
     <>
@@ -61,7 +60,6 @@ export default function OTPVerificationLayout() {
         }}
       >
         <div style={{ width: "50%", padding: "6rem" }}>
-          {/* <HeaderCompanyLogo /> */}
           <div
             style={{
               marginTop: "8rem",
@@ -71,14 +69,12 @@ export default function OTPVerificationLayout() {
             }}
           >
             <img
-              src={otpVerify}
+              src={mailVerifyForOTP}
               style={{ width: "60px", height: "60px" }}
               alt=""
             />
 
             <br />
-            {/* 
-            <AuthenticationFormHeaderText headerText="OTP Verification" /> */}
             <div
               style={{
                 width: "100%",
@@ -94,11 +90,11 @@ export default function OTPVerificationLayout() {
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "1rem",
+                    whiteSpace: "nowrap", // Ensures text stays in one line
                   }}
                 >
                   <span>
-                    Enter the OTP we have send to&nbsp;
-                    <b>{otpSentNumber}</b>
+                    Enter the OTP we have sent to your Registered Email
                   </span>
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -129,11 +125,16 @@ export default function OTPVerificationLayout() {
                       />
                     ))}
                   </div>
+                  {otpError && (
+                    <p style={{ color: "red", textAlign: "center" }}>
+                      {otpError}
+                    </p>
+                  )}
                   <button
                     style={{
                       marginTop: "2rem",
                       fontWeight: "600",
-                      backgroundColor: "#4f46e5",
+                      // backgroundColor: "#4f46e5",
                       color: "#ffffff",
                       width: "100%",
                       padding: "1rem",
@@ -141,22 +142,21 @@ export default function OTPVerificationLayout() {
                       cursor: "pointer",
                       transition: "background-color 0.3s ease",
                     }}
+                    className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm w-100"
                     type="submit"
                   >
-                    <img
-                      src={otpVerify}
-                      style={{ width: "30px", height: "30px" }}
-                      alt=""
-                    />
-
-                    {/* <UserAuthenticationButtonText authButtonText="Resend" /> */}
+                    Verify OTP
                   </button>
+                  <NavLink
+                    id="homeNavLink"
+                    to="/home"
+                    style={{ display: "none" }} // Hide the NavLink visually
+                  />
                 </form>
               </div>
             </div>
           </div>
         </div>
-        {/* <UserLoginFormSideImage  /> */}
       </body>
     </>
   );
