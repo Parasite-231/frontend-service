@@ -149,7 +149,7 @@ export default function OTPVerificationLayout() {
                   </button>
                   <NavLink
                     id="homeNavLink"
-                    to="/home"
+                    to="/client/otp-verified"
                     style={{ display: "none" }} // Hide the NavLink visually
                   />
                 </form>

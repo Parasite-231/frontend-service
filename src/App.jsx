@@ -8,6 +8,7 @@ import HomePage from "./pages/home/HomePage";
 import CVLayout from "./components/cv generator/CVLayout";
 import Collection from "./components/cv generator/Collection";
 import GetUser from "./components/admin/dashboard/GetUser";
+import OTPSuccessMesage from "./components/client/otp/OTPSuccessMesage";
 
 function App() {
   return (
@@ -17,10 +18,14 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/client/login" element={<LoginPage />} />
           <Route path="/client/register" element={<RegisterPage />} />
-          {/* <Route path="/home" element={<HomePage />} /> */}
+          <Route path="/home" element={<HomePage />} />
           <Route
             path="/client/otp-verification"
             element={<OTPVerificationPage />}
+          />
+          <Route
+            path="/client/otp-verified"
+            element={<OTPSuccessMesage />}
           />
           <Route path="/admin/dashboard" element={<DashboardPage />} />
           <Route path="/generate/:id" element={<CVLayout />} />
