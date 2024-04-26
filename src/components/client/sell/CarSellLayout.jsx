@@ -118,32 +118,57 @@ export default function CarSellLayout() {
     }
   };
 
-  const uploadImages = async (carId) => {
+ const uploadImages = async (carId, name) => {
    try {
-    setLoading(true);
-    const formData = new FormData();
-    fileList.forEach((file) => {
-      formData.append("files", file.originFileObj, carId);
-    });
-    const token = sessionStorage.getItem("accessToken");
-    await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/api/product/upload-image/text`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    message.success("Images uploaded successfully");
-  } catch (error) {
-    console.error("Error uploading images:", error);
-    message.error("Error uploading images");
-  } finally {
-    setLoading(false);
-  }
-};
+     setLoading(true);
+     const formData = new FormData();
+
+     // Convert each file to base64 and append to formData
+     for (let i = 0; i < fileList.length; i++) {
+       const file = fileList[i];
+       const reader = new FileReader();
+       reader.readAsDataURL(file.originFileObj);
+       reader.onload = function () {
+         formData.append("files", reader.result.split(",")[1], file.name);
+         if (i === fileList.length - 1) {
+           // When all files are appended, also append carId and name
+           formData.append("carId", carId);
+           formData.append("name", name);
+
+           // Make the POST request with the FormData object
+           postFormData(formData);
+         }
+       };
+     }
+   } catch (error) {
+     console.error("Error uploading images:", error);
+     message.error("Error uploading images");
+     setLoading(false);
+   }
+ };
+
+ const postFormData = async (formData) => {
+   try {
+     const token = sessionStorage.getItem("accessToken");
+     await axios.post(
+       `${import.meta.env.VITE_BASE_URL}/api/product/upload-image/text`,
+       formData,
+       {
+         headers: {
+           Authorization: `Bearer ${token}`,
+           "Content-Type": "multipart/form-data",
+         },
+       }
+     );
+     message.success("Images uploaded successfully");
+   } catch (error) {
+     console.error("Error uploading images:", error);
+     message.error("Error uploading images");
+   } finally {
+     setLoading(false);
+   }
+ };
+
 
 
   return (

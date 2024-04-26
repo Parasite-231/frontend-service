@@ -30,7 +30,7 @@ function App() {
           <Route path="/client/profile" element={<ProfilePage />} />
           <Route path="/client/car-sell" element={<CarSellPage />} />
           <Route
-            path="/client/car-details/:id/:model/:color/:year/:mileage/:price/:paper/:accidentHistory/:sellerName/:sellerEmail/:sellerPhoneNumber/:sellerAddress"
+            path="/client/car-details/:id/:ownerEmail/:model/:color/:year/:mileage/:price/:paper/:accidentHistory/:sellerName/:sellerEmail/:sellerPhoneNumber/:sellerAddress"
             element={<CarDetailsPage />}
           />
 
