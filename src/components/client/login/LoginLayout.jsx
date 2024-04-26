@@ -79,14 +79,20 @@ export default function LoginLayout() {
                       </div>
                       <button
                         type="submit"
-                        className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm w-100"
+                        className="btn btn-block text-uppercase mb-2 rounded-pill shadow-sm w-100"
+                        style={{ background: "#8FC8CD" , color:"white"}}
                       >
                         Sign in
                       </button>
                     </form>
                     <span className="d-block text-center my-4 text-muted">
                       Don't have an account ?{" "}
-                      <NavLink to="/client/register">Sign Up</NavLink>
+                      <NavLink
+                        to="/client/register"
+                        style={{ color: "#8FC8CD" }}
+                      >
+                        Sign Up
+                      </NavLink>
                     </span>
                     {/* <span className="d-block text-center my-4 text-muted">
                       &mdash; or &mdash;

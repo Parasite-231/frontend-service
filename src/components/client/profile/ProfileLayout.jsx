@@ -148,7 +148,11 @@ export default function ProfileLayout() {
                   onChange={(e) => setMandatoryAddress(e.target.value)}
                   required
                 ></textarea>
-                <button className="btn btn-primary btn-block" type="submit">
+                <button
+                  className="btn btn-block"
+                  type="submit"
+                  style={{ background: "#8FC8CD", color:"white" }}
+                >
                   Update <i className="fas fa-edit"></i>
                 </button>
               </form>

@@ -198,21 +198,24 @@ export default function RegisterLayout() {
                           placeholder="Address (Optional)"
                           value={address}
                           onChange={handleAddressChange}
-                          style={{resize:"none"}}
+                          style={{ resize: "none" }}
                           rows={4} // Increase the number of rows for the textarea
                         ></textarea>
                       </div>
 
                       <button
                         type="submit"
-                        className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm w-100"
+                        className="btn btn-block text-uppercase mb-2 rounded-pill shadow-sm w-100"
+                        style={{ background: "#8FC8CD" , color:"white"}}
                       >
                         Sign Up
                       </button>
                     </form>
                     <span className="d-block text-center my-4 text-muted">
                       Don't have an account ?{" "}
-                      <NavLink to="/client/login">Sign In</NavLink>
+                      <NavLink to="/client/login" style={{ color: "#8FC8CD" }}>
+                        Sign In
+                      </NavLink>
                     </span>
                     {/* <span className="d-block text-center my-4 text-muted">
                       &mdash; or &mdash;

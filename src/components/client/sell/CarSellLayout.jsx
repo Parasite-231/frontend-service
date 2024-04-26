@@ -72,19 +72,23 @@ export default function CarSellLayout() {
             <div className="col-md-6">
               <form onSubmit={handleSubmit}>
                 <div className="text-center mb-3">
+               
                   <ImgCrop rotationSlider>
                     <Upload
                       action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
                       listType="picture-card"
+                      
                       fileList={fileList}
                       onChange={onChange}
                       onPreview={onPreview}
+                      
                     >
                       {fileList.length < 3 && "+ Upload"}
                     </Upload>
                   </ImgCrop>
+                
                   {fileList.length >= 3 && (
-                    <p style={{ color: "red", margin:"40px" }}>
+                    <p style={{ color: "red", margin: "40px" }}>
                       You can add at most 3 images of your car
                     </p>
                   )}
@@ -143,7 +147,11 @@ export default function CarSellLayout() {
                   onChange={(e) => setAccidentHistory(e.target.value)}
                   required
                 ></textarea>
-                <button className="btn btn-primary btn-block" type="submit">
+                <button
+                  className="btn btn-block"
+                  type="submit"
+                  style={{ background: "#8FC8CD", color: "white" }}
+                >
                   Create Sell Post
                 </button>
               </form>
