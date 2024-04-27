@@ -31,7 +31,7 @@ export default function CarSellCollection() {
 
         if (response.data && Array.isArray(response.data.data)) {
           setSellPosts(response.data.data);
-          console.log(response.data.data)
+          console.log(response.data.data);
         } else {
           console.error("Response data is not an array:", response.data);
         }
