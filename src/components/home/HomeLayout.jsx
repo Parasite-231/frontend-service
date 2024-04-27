@@ -1,21 +1,18 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import tImage from "../../assets/img/e3.jpg";
 import f1Image from "../../assets/img/e6.jpg";
 import f2Image from "../../assets/img/t.jpg";
 import "../../styles/home/HomeStyle.css";
-import NavBarLayout from "../client/nav/NavBarLayout";
-import CarSellCollection from "./CarSellCollection";
-import AboutSection from "./AboutSection";
-import BlogSection from "./BlogSection";
-import TestimonialSection from "./TestimonialSection";
-import ContactSection from "./ContactSection";
 import FooterLayout from "../client/footer/FooterLayout";
-import { NavLink } from "react-router-dom";
+import NavBarLayout from "../client/otp/nav/NavBarLayout";
+import AboutSection from "./AboutSection";
+import CarSellCollection from "./CarSellCollection";
+import ContactSection from "./ContactSection";
+import TestimonialSection from "./TestimonialSection";
 export default function HomeLayout() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [tImage, f1Image, f2Image]; // Use your images here
-
-  
 
   useEffect(() => {
     const intervalId = setInterval(() => {

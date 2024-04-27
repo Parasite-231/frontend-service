@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
 import { Upload, message } from "antd";
 import ImgCrop from "antd-img-crop";
-import NavBarLayout from "../nav/NavBarLayout";
-import FooterLayout from "../footer/FooterLayout";
+import React, { useEffect, useState } from "react";
 import "../../../styles/home/HomeStyle.css";
+import FooterLayout from "../footer/FooterLayout";
+import NavBarLayout from "../otp/nav/NavBarLayout";
 // import b1 from "../../../assets/img/b1.jpg";
 // import cp from "../../../assets/img/cp.jpg";
-import mu from "../../../assets/img/mu.jpg";
 import axios from "axios";
+import mu from "../../../assets/img/mu.jpg";
 export default function ProfileLayout() {
   const [fileList, setFileList] = useState([]);
   const [name, setName] = useState("");
@@ -16,7 +16,6 @@ export default function ProfileLayout() {
   const [nid, setNid] = useState("");
   const [optionalAddress, setOptionalAddress] = useState("");
   const [mandatoryAddress, setMandatoryAddress] = useState("");
-
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -36,7 +35,7 @@ export default function ProfileLayout() {
         setPhone(userData.phoneNumber);
         setNid(userData.nid);
         setMandatoryAddress(userData.address);
-        console.log(userData)
+        console.log(userData);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -70,7 +69,6 @@ export default function ProfileLayout() {
     if (!email) {
       message.error({
         content: "Email is required",
-        
       });
       return;
     }
@@ -79,7 +77,6 @@ export default function ProfileLayout() {
     if (!mandatoryAddress) {
       message.error({
         content: "Mandatory address is required",
-        
       });
       return;
     }
@@ -88,7 +85,6 @@ export default function ProfileLayout() {
     if (nid.length !== 11 || isNaN(nid)) {
       message.error({
         content: "NID must be a 11-digit number",
-       
       });
       return;
     }
@@ -180,7 +176,7 @@ export default function ProfileLayout() {
                 <button
                   className="btn btn-block"
                   type="submit"
-                  style={{ background: "#8FC8CD", color:"white" }}
+                  style={{ background: "#8FC8CD", color: "white" }}
                 >
                   Update <i className="fas fa-edit"></i>
                 </button>

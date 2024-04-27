@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import "../../../styles/home/HomeStyle.css";
 import FooterLayout from "../footer/FooterLayout";
-import NavBarLayout from "../nav/NavBarLayout";
+import NavBarLayout from "../otp/nav/NavBarLayout";
 
 export default function CarSellLayout() {
   const [fileList, setFileList] = useState([]);
