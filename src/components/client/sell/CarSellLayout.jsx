@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Upload, message, Spin } from "antd";
+import { Spin, Upload, message } from "antd";
 import ImgCrop from "antd-img-crop";
 import axios from "axios";
+import React, { useState } from "react";
 import "../../../styles/home/HomeStyle.css";
 import FooterLayout from "../footer/FooterLayout";
 import NavBarLayout from "../nav/NavBarLayout";
@@ -46,12 +46,12 @@ export default function CarSellLayout() {
       });
       const token = sessionStorage.getItem("accessToken");
       await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/product/upload-image`,
+        `${import.meta.env.VITE_BASE_URL}/api/product/post`,
         formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
@@ -106,7 +106,7 @@ export default function CarSellLayout() {
       );
       message.success("Car details submitted successfully");
       // Extract car ID from the response
-      const carId = response.data.id;
+      const carId = response.data.data.id;
       console.log("Car details submit response:", response.data);
       // Use the car ID to upload images
       await uploadImages(carId);
@@ -118,58 +118,56 @@ export default function CarSellLayout() {
     }
   };
 
- const uploadImages = async (carId, name) => {
-   try {
-     setLoading(true);
-     const formData = new FormData();
+  const uploadImages = async (carId, name) => {
+    try {
+      setLoading(true);
+      // Convert each file to base64 and append to base64Images array
+      for (let i = 0; i < fileList.length; i++) {
+        const file = fileList[i];
+        const reader = new FileReader();
 
-     // Convert each file to base64 and append to formData
-     for (let i = 0; i < fileList.length; i++) {
-       const file = fileList[i];
-       const reader = new FileReader();
-       reader.readAsDataURL(file.originFileObj);
-       reader.onload = function () {
-         formData.append("files", reader.result.split(",")[1], file.name);
-         if (i === fileList.length - 1) {
-           // When all files are appended, also append carId and name
-           formData.append("carId", carId);
-           formData.append("name", name);
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = function () {
+          const base64Images = reader.result;
 
-           // Make the POST request with the FormData object
-           postFormData(formData);
-         }
-       };
-     }
-   } catch (error) {
-     console.error("Error uploading images:", error);
-     message.error("Error uploading images");
-     setLoading(false);
-   }
- };
+          if (i === fileList.length - 1) {
+            // When all files are converted to base64, make the POST request
+            postBase64Images(carId, name, base64Images);
+          }
+        };
+      }
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      message.error("Error uploading images");
+      setLoading(false);
+    }
+  };
 
- const postFormData = async (formData) => {
-   try {
-     const token = sessionStorage.getItem("accessToken");
-     await axios.post(
-       `${import.meta.env.VITE_BASE_URL}/api/product/upload-image/text`,
-       formData,
-       {
-         headers: {
-           Authorization: `Bearer ${token}`,
-           "Content-Type": "multipart/form-data",
-         },
-       }
-     );
-     message.success("Images uploaded successfully");
-   } catch (error) {
-     console.error("Error uploading images:", error);
-     message.error("Error uploading images");
-   } finally {
-     setLoading(false);
-   }
- };
-
-
+  const postBase64Images = async (carId, name, base64Images) => {
+    try {
+      const token = sessionStorage.getItem("accessToken");
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/product/upload-image-text`,
+        {
+          carId,
+          name,
+          image: base64Images,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      message.success("Images uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      message.error("Error uploading images");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -245,7 +243,6 @@ export default function CarSellLayout() {
                   type="number"
                   placeholder="Price"
                   className="form-control mb-3"
-                 
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
