@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import c1test from "../../assets/img/c1test2.jpg";
 import LoaderLayout from "../loader/LoaderLayout";
 
 export default function CarSellCollection() {
@@ -30,8 +29,12 @@ export default function CarSellCollection() {
         );
 
         if (response.data && Array.isArray(response.data.data)) {
-          setSellPosts(response.data.data);
-          console.log(response.data.data);
+          setSellPosts(
+            response.data.data.map((post) => ({
+              ...post,
+              image: post.image,
+            }))
+          );
         } else {
           console.error("Response data is not an array:", response.data);
         }
@@ -73,7 +76,7 @@ export default function CarSellCollection() {
                 <div key={post.id} className="col-md-6 col-lg-4">
                   <div className="box">
                     <div className="img-box">
-                      <img src={post.image || c1test} alt={post.title} />
+                      <img src={post.image} alt={post.model} />
                     </div>
                     <div className="detail-box">
                       <h5>{post.model}</h5>

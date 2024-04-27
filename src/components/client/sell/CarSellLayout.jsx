@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import "../../../styles/home/HomeStyle.css";
 import FooterLayout from "../footer/FooterLayout";
-import NavBarLayout from "../nav/NavBarLayout";
+import NavBarLayout from "../otp/nav/NavBarLayout";
 
 export default function CarSellLayout() {
   const [fileList, setFileList] = useState([]);
@@ -128,7 +128,10 @@ export default function CarSellLayout() {
 
         reader.readAsDataURL(file.originFileObj);
         reader.onload = function () {
-          const base64Images = reader.result;
+          const secondPart = reader.result.split(";")[1];
+
+          let base64Images = reader.result.split(";")[0];
+          base64Images = base64Images + ";charset=utf-8;" + secondPart;
 
           if (i === fileList.length - 1) {
             // When all files are converted to base64, make the POST request
